@@ -1,22 +1,46 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div class="fillcontain">
+    <el-row style="height: 100%">
+      <el-col :span="4" style="min-height: 100%; background-color: #324157">
+        <el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
+          <el-menu-item index="home2"><i class="el-icon-menu"></i>首页</el-menu-item>
+          <el-submenu index="2">
+            <template slot="title"><i class="el-icon-document"></i>数据管理</template>
+            <el-menu-item index="detail">用户列表</el-menu-item>
+            <el-menu-item index="detail">商家列表</el-menu-item>
+            <el-menu-item index="detail">食品列表</el-menu-item>
+            <el-menu-item index="detail">订单列表</el-menu-item>
+            <el-menu-item index="detail">管理员列表</el-menu-item>
+          </el-submenu>
+          <el-submenu index="3">
+            <template slot="title"><i class="el-icon-plus"></i>添加数据</template>
+            <el-menu-item index="order">添加商铺</el-menu-item>
+            <el-menu-item index="order">添加食品</el-menu-item>
+          </el-submenu>
+          <el-submenu index="4">
+            <template slot="title"><i class="el-icon-star-on"></i>图表</template>
+            <el-menu-item index="detail">用户分布</el-menu-item>
+          </el-submenu>
+          <el-submenu index="5">
+            <template slot="title"><i class="el-icon-edit"></i>编辑</template>
+            <el-menu-item index="detail">文本编辑</el-menu-item>
+          </el-submenu>
+          <el-submenu index="6">
+            <template slot="title"><i class="el-icon-setting"></i>设置</template>
+            <el-menu-item index="detail">管理员设置</el-menu-item>
+          </el-submenu>
+          <el-submenu index="7">
+            <template slot="title"><i class="el-icon-warning"></i>说明</template>
+            <el-menu-item index="detail">说明</el-menu-item>
+          </el-submenu>
+        </el-menu>
+      </el-col>
+      <el-col :span="20" style="height: 100%; overflow: auto;">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -26,6 +50,11 @@ export default {
   data () {
     return {
       msg: 'Welcome to Hello.vue'
+    }
+  },
+  computed: {
+    defaultActive: function () {
+     return  this.$route.path.replace('/','')
     }
   }
 }
